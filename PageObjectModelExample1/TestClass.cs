@@ -18,7 +18,8 @@ namespace PageObjectModelExample1
             LoginPage loginPage = new LoginPage(driver);
             var dashBoard = loginPage.EnterLogin("Admin", "admin123");
            var assign =  dashBoard.BtnAssignLeave();
-            assign.assignLeave("Yakov", "2020-01-16", "2020-01-22","Well Done Blop !!!\nNow Press The Butoon Assing");
+            assign.assignLeave("Russel Hamilton", "2020-01-16", "2020-01-22","Well Done Blop !!!\nNow Press The Butoon Assing");
+            
 
         }
     }

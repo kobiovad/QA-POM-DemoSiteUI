@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Interactions;
 
 namespace PageObjectModelExample1.PageObject
 {
@@ -30,8 +31,8 @@ namespace PageObjectModelExample1.PageObject
         [FindsBy(How = How.Id, Using = "assignleave_txtComment")]
         public IWebElement txtComment { get; set; }
 
-        //[FindsBy(How = How.XPath, Using = "")]
-        //public IWebElement btnAssing { get; set; }
+        [FindsBy(How = How.Id, Using = "assignBtn")]
+        public IWebElement btnAssing { get; set; }
 
 
         public void assignLeave(string EmployeeName, string FromDate, string ToDate, string Comment)
@@ -42,22 +43,26 @@ namespace PageObjectModelExample1.PageObject
             txtFromDate.SendKeys(FromDate);
             txtToDate.Clear();
             txtToDate.SendKeys(ToDate);
-            dropDownSelectedHidden();
+            //dropDownSelectedHidden();
             txtComment.SendKeys(Comment);
-            //btnAssing.Click();
+            btnAssing.Click();
         }
         public void dropDownSelected()
         {
             SelectElement drpLeaveType = new SelectElement(driver.FindElement(By.Id("assignleave_txtLeaveType")));
             drpLeaveType.SelectByText("Paternity US");
         }
-        public void dropDownSelectedHidden()
+        public void dropDownSelectedHidden() // לבדוק למה המשתנה מוסתר וכיצד לחפש אותו ???
         {
-            SelectElement drpPartialDays = new SelectElement(driver.FindElement(By.Id("assignleave_txtLeaveType")));
-
-             // לבדוק למה המשתנה מוסתר וכיצד לחפש אותו ???
+            //SelectElement drpPartialDays = new SelectElement(driver.FindElement(By.Id("assignleave_txtLeaveType")));
 
             
+            Actions builder = new Actions(driver);
+            builder.MoveToElement(driver.FindElement(By.Id("assignleave_txtLeaveType"))).Build().Perform();
+            builder.SendKeys("Paternity US");
+
+            // builder.MoveToElement(driver.FindElement(By.Id("Enter Target here"))).Build().Perform();
+            //driver.FindElement(By.Id("Enter Target here")).Click();
         }
 
     }
